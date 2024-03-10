@@ -51,29 +51,37 @@
     function generateBashScript(urls) {
         const folderName = extractFolderNameFromUrl(urls[0]);
         let script = `#!/bin/bash
+    
+    # 定义下载文件夹的名称
+    folder_name="${folderName}"
+    
+    # 创建文件夹并进入
+    mkdir -p "$folder_name"
+    cd "$folder_name"
+    
+    # 定义URL数组
+    urls=(\n`;
 
-# 定义下载文件夹的名称
-folder_name="${folderName}"
-
-# 创建文件夹并进入
-mkdir -p "$folder_name"
-cd "$folder_name"
-
-# 下载文件列表
-`;
-
+        // 添加每个URL到数组
         urls.forEach(url => {
-            script += `curl -O "${url}" &\n`;
+            script += `    "${url}"\n`;
         });
 
-        script += `
-# 等待所有后台下载任务完成
-wait
-
-echo "所有文件已下载完成。"
-`;
+        script += `)
+    
+    # 遍历数组，下载每个文件
+    for url in "\${urls[@]}"; do
+        curl -O "$url" &
+    done
+    
+    # 等待所有后台下载任务完成
+    wait
+    
+    echo "所有文件已下载完成。"
+    `;
         return script;
     }
+
 
     function addFastDownloadButton(bashScriptText) {
         const tabList = document.querySelector('.css-7hd0xg ul[role="tablist"]');
