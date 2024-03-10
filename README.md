@@ -11,7 +11,7 @@ This Tampermonkey script is specifically designed for the 10x Genomics website, 
 
 ## How to Install
 1. Ensure you have Tampermonkey installed in your browser.
-2. Click on the script link (provide a link to your script here).
+2. Click on the script link ([link](https://raw.githubusercontent.com/aqlkzf/download_10Xdata/main/download_script.js)).
 3. Tampermonkey should open a new tab asking if you want to install the script. Click on "Install".
 
 ## Usage

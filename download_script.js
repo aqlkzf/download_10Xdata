@@ -6,6 +6,8 @@
 // @author       fuyao  
 // @match        https://www.10xgenomics.com/*
 // @grant        none
+// @updateURL   https://raw.githubusercontent.com/aqlkzf/download_10Xdata/main/download_script.js
+//@downloadURL https://raw.githubusercontent.com/aqlkzf/download_10Xdata/main/download_script.js    
 // ==/UserScript==
 
 (function () {
