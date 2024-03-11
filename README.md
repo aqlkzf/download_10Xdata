@@ -1,5 +1,5 @@
 # Enhance 10x Genomics Page with Text-Based Fast Download and Log
-
+![preview](https://github.com/aqlkzf/typoraimg/raw/main/img_office/2024/03/11/354cb96c7436eaa75c6f3cf8579009df-image-20240311203153670-4668fe.png)
 ## 使用说明
 
 ### 安装步骤
