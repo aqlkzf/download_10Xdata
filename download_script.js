@@ -6,12 +6,13 @@
 // @author       fuyao
 // @match        https://www.10xgenomics.com/*
 // @grant        none
+// @license MIT
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
-let curlButtonId = '';
-      function replaceCurlContentWithBashScript(bashScriptContent) {
+    let curlButtonId = '';
+    function replaceCurlContentWithBashScript(bashScriptContent) {
         // Find the active tab panel
         const activeTabPanel = document.querySelector('.react-tabs__tab-panel.Active');
 
@@ -46,9 +47,9 @@ let curlButtonId = '';
         return urls;
     }
 
-function generateBashScript(urls) {
-    const folderName = extractFolderNameFromUrl(urls[0]);
-    let script = `#!/bin/bash
+    function generateBashScript(urls) {
+        const folderName = extractFolderNameFromUrl(urls[0]);
+        let script = `#!/bin/bash
 
 # 定义下载文件夹的名称
 folder_name="${folderName}"
@@ -60,12 +61,12 @@ cd "$folder_name"
 # 定义URL数组
 urls=(\n`;
 
-    // 添加每个URL到数组
-    urls.forEach(url => {
-        script += `    "${url}"\n`;
-    });
+        // 添加每个URL到数组
+        urls.forEach(url => {
+            script += `    "${url}"\n`;
+        });
 
-    script += `)
+        script += `)
 
 # 遍历数组，下载每个文件
 for url in "\${urls[@]}"; do
@@ -77,11 +78,11 @@ wait
 
 echo "所有文件已下载完成。"
 `;
-    return script;
-}
+        return script;
+    }
 
 
-      function addFastDownloadButton(bashScriptText) {
+    function addFastDownloadButton(bashScriptText) {
         const tabList = document.querySelector('.css-7hd0xg ul[role="tablist"]');
         if (!tabList) return;
 
@@ -101,7 +102,7 @@ echo "所有文件已下载完成。"
         const newTabPanel = document.createElement('div');
 
 
-        fastDownloadLi.addEventListener('click', function() {
+        fastDownloadLi.addEventListener('click', function () {
             // Using the recorded 'curl' button id to find and click the 'curl' button
             if (curlButtonId) {
                 const curlBtn = document.getElementById(curlButtonId);
@@ -110,7 +111,7 @@ echo "所有文件已下载完成。"
                     setTimeout(() => {
                         curlBtn.setAttribute('aria-selected', 'false');
                         replaceCurlContentWithBashScript(bashScriptText);
-                        console.log( curlBtn.classList.contains('Active'));
+                        console.log(curlBtn.classList.contains('Active'));
                         curlBtn.classList.remove('Active');
                         fastDownloadLi.classList.add('Active');
                         fastDownloadLi.setAttribute('aria-selected', 'true');
@@ -126,7 +127,7 @@ echo "所有文件已下载完成。"
     }
 
     // Your existing window.addEventListener('load', ...) function here
-        window.addEventListener('load', () => {
+    window.addEventListener('load', () => {
         setTimeout(() => {
             const batchDownloadBtn = Array.from(document.querySelectorAll('li')).find(li => li.textContent.trim() === 'Batch download');
             if (!batchDownloadBtn) {
